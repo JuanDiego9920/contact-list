@@ -1,0 +1,81 @@
+// Lista de contactos con objetos
+let listaDeContactos = [
+  {
+    id: 1,
+    nombres: "Juan",
+    apellidos: "Pérez",
+    telefono: "123456789",
+    ubicaciones: [
+      { ciudad: "Ciudad A", direccion: "Calle 123" },
+      { ciudad: "Ciudad B", direccion: "Avenida 456" }
+    ]
+  },
+  {
+    id: 2,
+    nombres: "María",
+    apellidos: "García",
+    telefono: "987654321",
+    ubicaciones: [
+      { ciudad: "Ciudad C", direccion: "Avenida X" },
+      { ciudad: "Ciudad D", direccion: "Calle Y" }
+    ]
+  }
+];
+
+// Función para añadir un nuevo contacto a la lista
+function agregarContacto(contacto) {
+  listaDeContactos.push(contacto);
+}
+
+// Función para borrar un contacto existente de la lista
+function borrarContacto(nombreCompleto) {
+  let indice = listaDeContactos.findIndex(contacto => 
+    `${contacto.nombres} ${contacto.apellidos}` === nombreCompleto);
+  if (indice !== -1) {
+    listaDeContactos.splice(indice, 1);
+  }
+}
+
+// Función para actualizar un contacto existente
+function actualizarContacto(id, nuevoDatos) {
+  let indice = listaDeContactos.findIndex(contacto => contacto.id === id);
+  if (indice !== -1) {
+    listaDeContactos[indice] = { ...listaDeContactos[indice], ...nuevoDatos };
+  }
+}
+
+// Función para imprimir los contactos en consola
+function imprimirContactos() {
+  console.log("Lista de Contactos:");
+  for (let contacto of listaDeContactos) {
+    console.log(contacto);
+  }
+}
+
+// Agregar un nuevo contacto
+agregarContacto({
+  id: 3,
+  nombres: "Carlos",
+  apellidos: "González",
+  telefono: "555555555",
+  ubicaciones: [
+    { ciudad: "Ciudad E", direccion: "Calle Z" },
+    { ciudad: "Ciudad F", direccion: "Avenida Q" }
+  ]
+});
+
+// Imprimir la lista de contactos antes de borrar
+imprimirContactos();
+
+// Borrar un contacto existente por su nombre completo
+borrarContacto("María García");
+
+// Actualizar un contacto existente por su ID
+actualizarContacto(1, {
+  nombres: "Juan José",
+  apellidos: "Pérez Pérez",
+  telefono: "999999999"
+});
+
+// Imprimir la lista de contactos después de borrar y actualizar
+imprimirContactos();
